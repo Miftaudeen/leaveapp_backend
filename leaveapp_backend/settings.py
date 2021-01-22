@@ -16,7 +16,7 @@ from pathlib import Path
 PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
 BASE_DIR = os.path.dirname(PROJECT_DIR)
 STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')
-
+DISABLE_COLLECTSTATIC = 1
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
