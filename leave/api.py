@@ -2,22 +2,24 @@ from datetime import datetime
 
 from django.utils.decorators import method_decorator
 from rest_framework import generics
+from rest_framework.authtoken.views import ObtainAuthToken
+from rest_framework.response import Response
+from rest_framework_simplejwt.tokens import RefreshToken
 
 from leave.models import Leave, LeaveType, LeavePolicy
-from leave.serializers import LeaveSerializer, LeavePlanSerializer, LeaveTypeSerializer, LeavePolicySerializer
-from leaveapp_backend.utils import cache_per_user
+from leave.serializers import LeaveSerializer, LeaveTypeSerializer, LeavePolicySerializer, LeaveListSerializer
 
 
-class LeaveList(generics.ListCreateAPIView):
-    serializer_class = LeaveSerializer
+class LeaveList(generics.ListAPIView):
+    serializer_class = LeaveListSerializer
 
     def get_queryset(self):
-        user = self.request.user
-        return Leave.objects.select_related('leave_policy', 'relief', 'changed_by').filter(employee=user)
+        return Leave.objects.select_related('leave_policy', 'relief', 'changed_by')
 
-    @method_decorator(cache_per_user(60 * 1))
-    def list(self, request, *args, **kwargs):
-        return super().list(request, *args, **kwargs)
+
+class LeaveCreate(generics.CreateAPIView):
+    serializer_class = LeaveSerializer
+    queryset = Leave.objects.all()
 
 
 class LeaveTypeList(generics.ListAPIView):
@@ -28,3 +30,24 @@ class LeaveTypeList(generics.ListAPIView):
 class LeavePolicyList(generics.ListAPIView):
     serializer_class = LeavePolicySerializer
     queryset = LeavePolicy.objects.all()
+
+
+class CustomAuthToken(ObtainAuthToken):
+
+    def post(self, request, *args, **kwargs):
+        serializer = self.serializer_class(data=request.data,
+                                           context={'request': request})
+        serializer.is_valid(raise_exception=True)
+        user = serializer.validated_data['user']
+        refresh = RefreshToken.for_user(user)
+        return Response({
+            'refresh': str(refresh),
+            'access': str(refresh.access_token),
+            'id': user.pk,
+            'first_name': user.first_name,
+            'last_name': user.last_name,
+            'middle_name': user.middle_name,
+            'hire_date': user.hire_date,
+            'email': user.email,
+            'username': user.username,
+        })
