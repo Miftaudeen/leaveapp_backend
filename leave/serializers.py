@@ -6,24 +6,6 @@ from employees.models import Employee
 from leave.models import Leave, LeaveType, LeavePolicy, EmployeeLeaveStructure, get_number_working_days
 
 
-class ChoiceField(serializers.ChoiceField):
-
-    def to_representation(self, obj):
-        if obj == '' and self.allow_blank:
-            return obj
-        return self._choices[obj]
-
-    def to_internal_value(self, data):
-        # To support inserts with the value
-        if data == '' and self.allow_blank:
-            return ''
-
-        for key, val in self._choices.items():
-            if val == data:
-                return key
-        self.fail('invalid_choice', input=data)
-
-
 class LeaveListSerializer(serializers.ModelSerializer):
     leave_policy = serializers.StringRelatedField()
     relief = serializers.StringRelatedField()
