@@ -123,17 +123,17 @@ REST_FRAMEWORK = {
 
 CORS_ORIGIN_WHITELIST = [
     "http://localhost:4200",
-    "https://leaveapp-frontend.herokuapp.com/"
+    "https://leaveapp-frontend.herokuapp.com"
 ]
 
 CSRF_ALLOWED_ORIGINS = [
     'http://localhost:4200',
-    "https://leaveapp-frontend.herokuapp.com/"
+    "https://leaveapp-frontend.herokuapp.com"
 ]
 
 CSRF_TRUSTED_ORIGINS = [
     'http://localhost:4200',
-    "https://leaveapp-frontend.herokuapp.com/"
+    "https://leaveapp-frontend.herokuapp.com"
 ]
 
 LANGUAGE_CODE = 'en-us'
