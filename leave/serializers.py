@@ -1,8 +1,8 @@
 from datetime import datetime
 
 from rest_framework import serializers
-from rest_framework_simplejwt.state import User
 
+from employees.models import Employee
 from leave.models import Leave, LeaveType, LeavePolicy, EmployeeLeaveStructure, get_number_working_days
 
 
@@ -20,9 +20,9 @@ class LeaveListSerializer(serializers.ModelSerializer):
 
 class LeaveSerializer(serializers.ModelSerializer):
     leave_policy = serializers.PrimaryKeyRelatedField(queryset=LeavePolicy.objects.all())
-    relief = serializers.PrimaryKeyRelatedField(queryset=User.objects.all())
-    changed_by = serializers.PrimaryKeyRelatedField(queryset=User.objects.all())
-    employee = serializers.PrimaryKeyRelatedField(queryset=User.objects.all())
+    relief = serializers.PrimaryKeyRelatedField(queryset=Employee.objects.all())
+    changed_by = serializers.PrimaryKeyRelatedField(queryset=Employee.objects.all())
+    employee = serializers.PrimaryKeyRelatedField(queryset=Employee.objects.all())
 
     class Meta:
         model = Leave
