@@ -59,13 +59,12 @@ class UserChangeForm(ModelForm):
 
 class UserAdmin(BaseUserAdmin):
     # The forms to add and change user instances
-    form = UserChangeForm
-    add_form = UserCreationForm
+    form = UserCreationForm
 
     # The fields to be used in displaying the User model.
     # These override the definitions on the base UserAdmin
     # that reference specific fields on auth.User.
-    list_display = ( 'last_name', 'first_name', 'hire_date', 'is_active', 'is_staff', 'is_superuser',)
+    list_display = ('last_name', 'first_name', 'hire_date', 'is_active', 'is_staff', 'is_superuser',)
     list_filter = ('is_superuser',)
     fieldsets = [
         (None, {'fields': ('username', 'email', 'password', 'hire_date', 'is_staff', 'is_superuser', 'is_active')}),
@@ -75,7 +74,7 @@ class UserAdmin(BaseUserAdmin):
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('username', 'email', 'hire_date', 'password1', 'password2')}
+            'fields': ('username', 'email', 'last_name', 'first_name', 'hire_date', 'password1', 'password2')}
         ),
     )
     search_fields = ['first_name', 'last_name']

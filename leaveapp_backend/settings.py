@@ -25,7 +25,7 @@ SECRET_KEY = 'q_1it&8%@0dv)n6+ahsoeuu9q6ojpt7f+04z5@q8r%$7i861zu'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['afexleaveapp.herokuapp.com']
+ALLOWED_HOSTS = ['afexleaveapp.herokuapp.com', '127.0.0.1']
 
 
 # Application definition
