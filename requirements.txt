@@ -1,6 +1,7 @@
 Django==3.1.5
 django-cors-headers==3.6.0
 djangorestframework==3.12.2
+drf-yasg==1.20.0
 -e git+https://github.com/SimpleJWT/django-rest-framework-simplejwt#egg=djangorestframework-simplejwt
 gunicorn==20.0.4
 PyJWT==2.0.1
