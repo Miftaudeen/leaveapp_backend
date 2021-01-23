@@ -41,7 +41,8 @@ class CustomAuthToken(ObtainAuthToken):
         user = serializer.validated_data['user']
         refresh = RefreshToken.for_user(user)
         return Response({
-            'access': str(refresh.access_token),
+            'refresh': str(refresh),
+            'access': refresh.access_token,
             'id': user.pk,
             'first_name': user.first_name,
             'last_name': user.last_name,
