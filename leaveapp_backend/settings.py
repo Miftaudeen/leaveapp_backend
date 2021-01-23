@@ -122,15 +122,18 @@ REST_FRAMEWORK = {
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
 CORS_ORIGIN_WHITELIST = [
-    "http://localhost:4200"
+    "http://localhost:4200",
+    "https://leaveapp_frontend.herokuapp.com"
 ]
 
 CSRF_ALLOWED_ORIGINS = [
     'http://localhost:4200',
+    "https://leaveapp_frontend.herokuapp.com"
 ]
 
 CSRF_TRUSTED_ORIGINS = [
     'http://localhost:4200',
+    "https://leaveapp_frontend.herokuapp.com"
 ]
 
 LANGUAGE_CODE = 'en-us'
