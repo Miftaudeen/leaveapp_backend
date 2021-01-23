@@ -42,7 +42,7 @@ class CustomAuthToken(ObtainAuthToken):
         refresh = RefreshToken.for_user(user)
         return Response({
             'refresh': str(refresh),
-            'access': refresh.access_token,
+            'access': str(refresh.access_token),
             'id': user.pk,
             'first_name': user.first_name,
             'last_name': user.last_name,
